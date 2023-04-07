@@ -1,0 +1,48 @@
+.carousel {
+  display: flex;
+  width: 500px;
+  height: 300px;
+  border: 2px solid white;
+  background-color: rgb(126, 126, 126);
+  position: relative;
+  // overflow: hidden;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li {
+    min-width: 100%;
+    height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  // background-color: lavender;
+  // color: lavenderblush;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  width: 50px;
+}
+
+.btnLeft {
+  left: 0;
+}
+
+.btnRight {
+  right: 0;
+}
