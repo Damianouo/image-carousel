@@ -5,7 +5,7 @@
   border: 2px solid white;
   background-color: rgb(126, 126, 126);
   position: relative;
-  // overflow: hidden;
+  overflow: hidden;
 }
 
 .container {
@@ -30,8 +30,6 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  // background-color: lavender;
-  // color: lavenderblush;
   font-size: 1.5rem;
   border: none;
   cursor: pointer;

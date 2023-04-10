@@ -5,6 +5,7 @@
   border: 2px solid white;
   background-color: rgb(126, 126, 126);
   position: relative;
+  overflow: hidden;
 }
 
 .container {

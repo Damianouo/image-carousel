@@ -1,67 +1,40 @@
-import React, {
-  useMemo, Children, useState, useLayoutEffect, useRef, useEffect,
-} from 'react';
+import React, { useMemo, useState, useRef } from 'react';
 import './styles/carousel.css';
 
 export default function Carousel({ children }) {
   const containerRef = useRef(null);
   const [current, setCurrent] = useState(1);
-  // const [translateX, setTranslateX] = useState(0);
 
   const btnHandler = (mode) => {
-    containerRef.current.style.transition = 'all 500ms ease-in-out';
+    containerRef.current.style.transitionDuration = '500ms';
 
     if (mode === 'left') {
+      setCurrent((prev) => --prev);
       if (current <= 1) {
-        setCurrent((prev) => --prev);
-
         setTimeout(() => {
+          containerRef.current.style.transitionDuration = '0ms';
           setCurrent(children.length);
         }, 500);
-      } else {
-        setCurrent((prev) => --prev);
       }
     } else if (mode === 'right') {
-      if (current >= children.length - 1) {
-        setCurrent((prev) => ++prev);
-
+      setCurrent((prev) => ++prev);
+      if (current >= children.length) {
         setTimeout(() => {
-          setCurrent(-1);
+          containerRef.current.style.transitionDuration = '0ms';
+          setCurrent(1);
         }, 500);
-      } else {
-        setCurrent((prev) => ++prev);
       }
     }
   };
 
-  useEffect(() => {
-    const transitionEnd = () => {
-      if (current <= 1) {
-        containerRef.current.style.transition = 'none';
-      } else if (current >= children.length - 2) {
-        containerRef.current.style.transition = 'none';
-      }
-    };
-    document.addEventListener('transitionend', transitionEnd);
-
-    return () => {
-      document.removeEventListener('transitionend', transitionEnd);
-    };
-  }, [current]);
-
   const slides = useMemo(() => {
     if (children.length > 1) {
-      // const items = Children.map(children, (child, index) => (
-      //   <li className="slide" key={index}>
-      //     {child}
-      //   </li>
-      // ));
       let items = [];
-      for (let ile = 0; ile < children.length; ile++) {
+      for (let k = 0; k < children.length; k++) {
         items = [
           ...items,
-          <li className="slide" key={ile}>
-            {children[ile]}
+          <li className="slide" key={k}>
+            {children[k]}
           </li>,
         ];
       }
@@ -78,12 +51,6 @@ export default function Carousel({ children }) {
 
     return <li className="slide">{children[0]}</li>;
   }, [children]);
-
-  // ' Postion first element correctly & this will render only once
-
-  // useLayoutEffect(() => {
-  //   setTranslateX(containerRef.current.clientWidth * current);
-  // }, []);
 
   return (
     <section className="carousel">
